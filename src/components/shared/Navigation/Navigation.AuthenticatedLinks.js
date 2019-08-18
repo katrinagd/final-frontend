@@ -17,12 +17,12 @@ const AuthenticatedLinks = ({ currentUserId, history, logoutUser }) => {
       </li>
       <li className='nav-item'>
         <Link className='nav-link' to={`/users/${currentUserId}/posts/new`}>
-            Create a New Post
+            Create New Assignment
         </Link>
       </li>
       <li className='nav-item'>
         <button
-          className='btn btn-link'
+          className='btn btn-secondary'
           onClick={logout}>
             Logout
         </button>

@@ -46,7 +46,7 @@ class Form extends React.Component {
             type='password'
             value={this.state.password} />
         </div>
-        <button type='submit' className='btn btn-primary'>Submit</button>
+        <button type='submit' className='btn btn-info'>Submit</button>
       </form>
     )
   }
