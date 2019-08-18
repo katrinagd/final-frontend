@@ -12,7 +12,7 @@ export default ({ currentUserId, destroyPost, post, user }) => (
           <button
             className='btn btn-link text-danger'
             onClick={() => destroyPost(post)}>
-            Delete Post
+            Delete Assignment
           </button>
         </>
       )

@@ -6,10 +6,10 @@ export default ({ currentUserId, destroyPost, user }) => {
   const posts = user.posts.map(post => (
     <div key={post._id} className='card'>
       <div className='card-body'>
-        <p className='card-text'>{ post.content }</p>
-        <blockquote className='blockquote mb-0'>
-          <footer className='blockquote-footer'>Was feeling: { post.emotion }</footer>
-        </blockquote>
+        <h4 className='card-title'>Project Title: { post.emotion }</h4>
+        <div className='mb-0'>
+          <p className='card-text'>Project Description: { post.content }</p>
+        </div>
       </div>
       <Actions
         currentUserId={currentUserId}
@@ -21,7 +21,7 @@ export default ({ currentUserId, destroyPost, user }) => {
 
   return (
     <>
-      <h1 className='mb-4'>{ user.username }'s Posts</h1>
+      <h1 className='mb-4'>{ user.username }'s Assignments</h1>
       { posts }
     </>
   )
