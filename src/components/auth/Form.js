@@ -81,6 +81,32 @@ class Form extends React.Component {
     return (
       <form noValidate onSubmit={this.handleSubmit}>
         <div className='form-group'>
+            <label htmlFor='email'>Email Address</label>
+              <input
+                className='form-control'
+                id='email'
+                onChange={this.handleChange}
+                onBlur={this.handleError}
+                name='email'
+                type='text'
+                value={this.state.email}
+                required
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='password'>Password</label>
+          <input
+            className='form-control'
+            id='password'
+            onChange={this.handleChange}
+            onBlur={this.handleError}
+            name='password'
+            type='password'
+            value={this.state.password}
+            required
+          />
+        </div>
+        <div className='form-group'>
             <label htmlFor='firstName'>First Name</label>
             <input
               className='form-control'
@@ -106,32 +132,6 @@ class Form extends React.Component {
               required
             />
           </div> 
-          <div className='form-group'>
-            <label htmlFor='email'>Email</label>
-              <input
-                className='form-control'
-                id='email'
-                onChange={this.handleChange}
-                onBlur={this.handleError}
-                name='email'
-                type='text'
-                value={this.state.email}
-                required
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            className='form-control'
-            id='password'
-            onChange={this.handleChange}
-            onBlur={this.handleError}
-            name='password'
-            type='password'
-            value={this.state.password}
-            required
-          />
-        </div>
         <button type='submit' className='btn btn-info'>Submit</button>
       </form>
     )

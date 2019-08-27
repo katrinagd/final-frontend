@@ -7,9 +7,12 @@ export default ({ currentUserId, destroyAssignment, user }) => {
   const assignments = user.assignments.map(assignment => (
     <div key={assignment._id} className='card'>
       <div className='card-body'>
-        <h4 className='card-title'>Project Title: { assignment.title }</h4>
+        <h4 className='card-title'>{ assignment.title }</h4>
         <div className='mb-0'>
-          <p className='card-text'>Project Description: { assignment.project_description }</p>
+          <p className='card-text'>{ assignment.project_description }</p>
+        </div>
+        <div className='mb-0'>
+        <a href="{ assignment.project_link }" className='card-text'>Project Link</a>
         </div>
         <Score assignmentScore={assignment.score} assignmentBase={assignment.base} />
       </div>
