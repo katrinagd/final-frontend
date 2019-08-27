@@ -2,22 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-export default ({ currentUserId, destroyPost, post, user }) => (
+export default ({ currentUserId, destroyAssignment, assignment, user }) => (
   <div className='card-footer text-muted d-flex justify-content-around'>
     {
       currentUserId === user._id
       && (
         <>
-          <Link className='btn btn-link' to={`/users/${user._id}/posts/${post._id}/edit`}>Edit Post</Link>
+          <Link className='btn btn-link' to={`/users/${user._id}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
           <button
             className='btn btn-link text-danger'
-            onClick={() => destroyPost(post)}>
+            onClick={() => destroyAssignment(assignment)}>
             Delete Assignment
           </button>
         </>
       )
     }
     
-    <span className='btn btn-link text-muted' disabled>Created {moment(post.created_at).fromNow()}</span>
+    <span className='btn btn-link text-muted' disabled>Created {moment(assignment.created_at).fromNow()}</span>
   </div>
 )

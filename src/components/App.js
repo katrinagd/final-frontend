@@ -18,7 +18,9 @@ class App extends React.Component {
     super()
     this.state = {
       currentUserId: null,
-      loading: true
+      isAdmin: null,
+      loading: true,
+      failure: null
     }
 
     this.loginUser = this.loginUser.bind(this)
@@ -28,19 +30,32 @@ class App extends React.Component {
 
   async componentDidMount () {
     if (token.getToken()) {
-      const { user } = await auth.profile();
-      this.setState({ currentUserId: user._id, loading: false });
+      const { user } = await auth.home();
+      if (user) {
+        this.setState({
+          currentUserId: user._id,
+          isAdmin: user.admin,
+          loading: false
+        });
+      }
     } else {
-      this.setState({ loading: false })
+      this.setState({ loading: false });
     }
   }
 
   async loginUser (user) {
     const response = await auth.login(user)
-    await token.setToken(response)
-    
-    const profile = await auth.profile()
-    this.setState({ currentUserId: profile.user._id })
+    if (response.message) {
+      this.setState({ failure: response.message });
+      return;
+    } else {
+      await token.setToken(response);
+      const home = await auth.home();
+      if (home) {
+        this.setState({ currentUserId: home.user._id });
+        this.setState({ isAdmin: home.user.admin });
+      }
+    }
   }
 
   logoutUser () {
@@ -52,12 +67,13 @@ class App extends React.Component {
     const response = await auth.signup(user)
     await token.setToken(response)
     
-    const profile = await auth.profile()
-    this.setState({ currentUserId: profile.user._id })
+    const home = await auth.home()
+    this.setState({ currentUserId: home.user._id });
+    this.setState({ isAdmin: home.user.admin });
   }
 
   render () {
-    const { currentUserId, loading } = this.state
+    const { currentUserId, isAdmin, loading } = this.state
     if (loading) return <span />
 
     return (
@@ -65,18 +81,19 @@ class App extends React.Component {
         <Header />
         <Navigation
           currentUserId={currentUserId}
+          isAdmin={isAdmin}
           logoutUser={this.logoutUser} />
         <Switch>
           <Route path='/login' exact component={() => {
-            return currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} />
+            return currentUserId ? <Redirect to='/users' /> : <Login onSubmit={this.loginUser} failure={this.state.failure} />
           }} />
           <Route path='/signup' exact component={() => {
-            return currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} />
+            return currentUserId ? <Redirect to='/users' /> : <Signup onSubmit={this.signupUser} failure={this.state.failure}/>
           }} />
 
           <Route path='/users' render={() => {
             return currentUserId
-              ? <UsersContainer currentUserId={currentUserId} />
+              ? <UsersContainer currentUserId={currentUserId} isAdmin={isAdmin} />
               : <Redirect to='/login' />
           }} />
 
@@ -87,4 +104,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default App;

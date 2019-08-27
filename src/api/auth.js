@@ -31,4 +31,4 @@ export const signup = async (user) => {
   return json
 }
 
-export const profile = () => request('/api/profile')
+export const home = () => request('/api/home')
