@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default ({ users, isAdmin }) => {
-  const assignments = users.map(user => (
+  const allAssignments = users.map(user => (
     <li key={user._id}>
       <Link to={`/users/${user._id}/assignments`}>
         {user.email}: {user.assignments.length} Assignments
@@ -14,7 +14,7 @@ export default ({ users, isAdmin }) => {
     <>
       <h1>All Assignments</h1>
       <ul>
-        { assignments }
+        { allAssignments }
       </ul>
     </>
   )

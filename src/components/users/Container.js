@@ -36,7 +36,7 @@ export default class Container extends React.Component {
 
     return (
       <main className='container'>
-        <Route path='/users' render={() => {
+        <Route path='/users' exact render={() => {
             return isAdmin ? (
               <List users={users} />
             ) : (

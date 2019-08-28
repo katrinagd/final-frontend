@@ -5,6 +5,6 @@ export default ({ onSubmit, assignment }) => (
   <section className='container'>
     <h1>Edit Your Assignment</h1>
     <hr />
-    <Form post={assignment} onSubmit={onSubmit} />
+    <Form assignment={assignment} onSubmit={onSubmit} />
   </section>
 )
